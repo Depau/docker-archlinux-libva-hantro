@@ -17,5 +17,7 @@ FROM depau/archlinux-daily:aarch64
 MAINTAINER "Davide Depau <davide@depau.eu>"
 
 COPY --from=pkgbuilder /aur/*/*.pkg.tar* /tmp/
-RUN pacman -U --noconfirm /tmp/*.pkg.tar* && rm /tmp/*.pkg.tar*
+RUN pacman -Syu --noconfirm && \
+    pacman -U --noconfirm /tmp/*.pkg.tar* && \
+    rm /tmp/*.pkg.tar*
 ENV LIBVA_DRIVER_NAME=v4l2_request
