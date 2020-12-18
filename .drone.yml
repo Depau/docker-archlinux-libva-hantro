@@ -1,0 +1,25 @@
+---
+kind: pipeline
+type: docker
+name: alarm-aarch64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: build-image
+    image: plugins/docker
+    environment:
+      TZ: Europe/Rome
+    settings:
+      dockerfile: Dockerfile
+      purge: true
+      username: depau
+      password:
+        from_secret: docker_password
+      repo: depau/archlinux-libva-hantro
+      tags:
+        - latest
+        - aarch64
+
